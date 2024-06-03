@@ -1,0 +1,73 @@
+\documentclass[8pt, aspectratio=169, t, notheorems]{beamer}
+
+% Theme
+\usetheme{sirocco}
+
+% % Title page
+\title{Title}
+\subtitle{Subtitle}
+\author{Author}
+\institute{Institute}
+% \logos[height=3em]{3}{
+% 	path/to/logo_1.jpg,
+% 	path/to/logo_2.png, 
+% 	path/to/logo_3.pdf
+% }
+% \titleimg[watermark overzoom=1,watermark opacity=.5]{path/to/background.pdf}
+
+\begin{document}
+\maketitle
+\section{Section} %\begingroup
+\label{sec:section}
+\subsection{Subsection} %\begingroup
+\label{sub:subsection}
+
+\begin{frame}{\insertsection}{\insertsubsection}
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. 
+	\begin{align}
+		X \sim \mathbb{P}_{X}
+	\end{align}
+
+	\begin{block}{Block}
+		Content.
+	\end{block}
+
+	\begin{exampleblock}{Block example}	
+		Content
+	\end{exampleblock}
+
+	\begin{alertblock}{Block alerted}
+		Content
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}{Title}{Theorems-like}
+	\begin{theorem}{Theorem}{theorem}
+		Content
+	\end{theorem}
+
+	\begin{proposition}{Proposition}{proposition}
+		Content
+	\end{proposition}
+
+	\begin{definition}{Definition}{definition}
+		Content
+	\end{definition}
+\end{frame}
+
+\begin{frame}{Title}{Figures and Tables}
+	\begin{table}[tb]
+		\caption{Caption}
+		\label{tab:tablename}
+		\centering
+		\begin{tabular}{l|ccc}
+		a & b & c & d
+		\end{tabular}
+	\end{table}
+
+	\begin{panel}{Panel}
+		Panel content
+	\end{panel}
+\end{frame}
+\end{document}

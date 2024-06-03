@@ -1,0 +1,90 @@
+\RequirePackage{xcolor}
+
+% plane
+% \definecolor{colora}{HTML}{69688C} % #69688C
+% \definecolor{colorb}{HTML}{383D59} % #383D59
+% \definecolor{colorc}{HTML}{99AABF} % #99AABF
+% \definecolor{colord}{HTML}{F2BC8D} % #F2BC8D
+% \definecolor{colore}{HTML}{F29F8D} % #F29F8D
+
+% INRIA
+\definecolor{lighttext}{HTML}{FFFFFF}
+\definecolor{darktext}{HTML}{000000}
+\definecolor{dark}{HTML}{384257} 	% #384257
+\definecolor{light}{HTML}{54728C} 	% #54728C
+\definecolor{example}{HTML}{99bb00} % #99bb00
+\definecolor{warning}{HTML}{F27E63} % #F27E63
+\definecolor{alert}{HTML}{D96262} 	% #D96262
+
+% Outer colors
+\setbeamercolor*{background canvas}{bg=white}
+
+\setbeamercolor*{framesubtitle}{bg=alert, fg=white}
+\setbeamercolor*{frametitle}{bg=dark, fg=white}
+
+\setbeamercolor*{progress bar}{bg=light, fg=alert}
+
+\setbeamercolor*{framenumber}{bg=alert, fg=white}
+\setbeamercolor*{totalframenumber}{bg=dark, fg=white}
+
+\setbeamercolor*{footline}{bg=white, fg=black}
+
+% Inner colors
+\setbeamercolor*{author}{fg=white}
+\setbeamercolor*{date}{fg=white}
+\setbeamercolor*{institute}{fg=white}
+\setbeamercolor*{subtitle}{fg=white}
+\setbeamercolor*{title}{fg=white}
+\setbeamercolor*{title page}{bg=dark, fg=white}
+
+\setbeamercolor*{section page}{bg=dark, fg=white}
+\setbeamercolor*{example text}{fg=example}
+
+\setbeamercolor*{block shade}{bg=dark}
+\setbeamercolor*{block title}{bg=light, fg=white}
+\setbeamercolor*{block body}{bg=white, fg=black}
+
+\setbeamercolor*{block shade example}{bg=dark}
+\setbeamercolor*{block title example}{bg=example, fg=white}
+\setbeamercolor*{block body example}{bg=white, fg=black}
+
+\setbeamercolor*{block shade alerted}{bg=dark}
+\setbeamercolor*{block title alerted}{bg=alert, fg=white}
+\setbeamercolor*{block body alerted}{bg=white, fg=black}
+
+\setbeamercolor*{panel title}{bg=white, fg=dark}
+\setbeamercolor*{panel body}{bg=white, fg=black}
+\setbeamercolor*{panel shade}{fg=dark}
+
+\setbeamercolor*{theorem shade}{bg=dark}
+\setbeamercolor*{definition title}{bg=light, fg=white}
+\setbeamercolor*{definition body}{bg=white, fg=black}
+
+\setbeamercolor*{proposition title}{bg=example, fg=white}
+\setbeamercolor*{proposition body}{bg=white, fg=black}
+
+\setbeamercolor*{theorem title}{bg=alert, fg=white}
+\setbeamercolor*{theorem body}{bg=white, fg=black}
+
+\setbeamercolor*{caption name}{bg=dark, fg=white}
+\setbeamercolor*{caption}{fg=light}
+
+\setbeamercolor*{description item}{fg=dark}
+
+\setbeamercolor*{itemize item}{fg=dark}
+\setbeamercolor*{itemize subitem}{fg=light}
+\setbeamercolor*{itemize subsubitem}{fg=light}
+
+\setbeamercolor*{enumerate item}{fg=dark}
+\setbeamercolor*{enumerate subitem}{fg=light}
+\setbeamercolor*{enumerate subsubitem}{fg=light}
+
+\setbeamercolor*{bibliography item}{fg=dark}
+\setbeamercolor*{bibliography entry author}{fg=darktext}
+\setbeamercolor*{bibliography entry title}{fg=warning}
+\setbeamercolor*{bibliography entry location}{fg=darktext}
+\setbeamercolor*{bibliography entry note}{fg=darktext}
+
+
+% Change color
+\newcommand{\changebeamercolor}[2]{\setbeamercolor{#1}{#2}\usebeamercolor{#1}}

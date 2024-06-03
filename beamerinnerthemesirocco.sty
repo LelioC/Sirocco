@@ -1,0 +1,497 @@
+% An inner theme installs templates that dictate how the following elements are typeset:
+% ∙ Title and part pages.
+% ∙ Itemize environments.
+% ∙ Enumerate environments.
+% ∙ Description environments.
+% ∙ Block environments.
+% ∙ Theorem and proof environments.
+% ∙ Figures and tables.
+% ∙ Footnotes.
+% ∙ Bibliography entries.
+
+% Load colors
+\usebeamercolor{author}
+\usebeamercolor{date}
+\usebeamercolor{institute}
+\usebeamercolor{subtitle}
+\usebeamercolor{title}
+\usebeamercolor{title page}
+
+\usebeamercolor{section page}
+
+\usebeamercolor{block shade}
+\usebeamercolor{block title}
+\usebeamercolor{block body}
+
+\usebeamercolor{block shade example}
+\usebeamercolor{block title example}
+\usebeamercolor{block body example}
+
+\usebeamercolor{block shade alerted}
+\usebeamercolor{block title alerted}
+\usebeamercolor{block body alerted}
+
+\usebeamercolor{panel title}
+\usebeamercolor{panel body}
+\usebeamercolor{panel shade}
+
+\usebeamercolor{theorem shade}
+\usebeamercolor{definition title}
+\usebeamercolor{definition body}
+
+\usebeamercolor{proposition title}
+\usebeamercolor{proposition body}
+
+\usebeamercolor{theorem title}
+\usebeamercolor{theorem body}
+
+\usebeamercolor{caption name}
+
+\mode<presentation>
+
+% Base settings
+\tcbset{
+    inner/.style={
+        % box
+        sharp corners=all,
+        % frames
+        % frame hidden,
+        boxrule=0pt,
+        % spacing
+        boxsep=0pt,
+        top=0pt,
+        left=0pt,
+        bottom=0pt,
+        right=0pt,
+        % before/after,
+        nobeforeafter,
+        beforeafter skip=0pt,
+        % more
+        #1
+    }
+}
+
+\tcbset{
+    title element/.style={
+        enhanced jigsaw,
+        width=\linewidth,
+        opacityback=0,
+    }
+}
+
+% Example text
+\newcommand<>{\examp}[1]{\textcolor#2{example}{#1}}
+
+% Title
+\newtcolorbox{sirocco@title}[1][]{
+    inner,
+    title element,
+    bottomrule=1pt,
+    bottom=2ex,
+    coltext=title.fg,
+    colframe=title.fg,
+    fontupper=\usebeamerfont{title},
+    after skip=1em,
+    #1
+}
+\defbeamertemplate*{title}{sirocco}{
+    \begin{sirocco@title}
+        \inserttitle
+    \end{sirocco@title}
+}
+
+% Subtitle
+\newtcolorbox{sirocco@subtitle}[1][]{
+    inner,
+    title element,
+    coltext=subtitle.fg,
+    fontupper=\usebeamerfont{subtitle},
+    beforeafter skip=1em,
+    #1
+}
+\defbeamertemplate*{subtitle}{sirocco}{
+    \begin{sirocco@subtitle}
+        \insertsubtitle
+    \end{sirocco@subtitle}
+}
+
+% Author
+\newtcolorbox{sirocco@author}[1][]{
+    inner,
+    title element,
+    coltext=author.fg,
+    colframe=author.fg,
+    leftrule=1pt,
+    left=1em,
+    fontupper=\usebeamerfont{author},
+    beforeafter skip=1em,
+    #1
+}
+\defbeamertemplate*{author}{sirocco}{
+    \begin{sirocco@author}
+        \insertauthor
+    \end{sirocco@author}
+}
+
+% Institute
+\newtcolorbox{sirocco@institute}[1][]{
+    inner,
+    title element,
+    coltext=institute.fg,
+    colframe=institute.fg,
+    leftrule=1pt,
+    left=1em,
+    fontupper=\usebeamerfont{institute},
+    after skip=1em,
+    #1
+}
+\defbeamertemplate*{institute}{sirocco}{
+    \begin{sirocco@institute}
+        \insertinstitute
+    \end{sirocco@institute}
+}
+
+% Date
+\newtcbox{\sirocco@date}[1][]{
+    inner,
+    title element,
+    coltext=date.fg,
+    colframe=date.fg,
+    rightrule=1pt,
+    right=1em,
+    fontupper=\usebeamerfont{date},
+    after skip=1em,
+    #1
+}
+\defbeamertemplate*{date}{sirocco}{
+    \sirocco@date{\insertdate}
+}
+
+% Logos
+\gdef\sirocco@logos{}
+\newtcolorbox{sirocco@logobox}{
+    inner,
+    enhanced jigsaw,
+    rounded corners=all,
+    colback=white,
+    opacityback=0,
+    coltext=black,
+    width=\linewidth,
+    halign=center,
+    valign=top,
+    boxsep=.1em,
+}
+\newtcbox{\sirocco@logo}[1][]{
+    inner, enhanced jigsaw,
+    frame hidden,
+    size=fbox,
+    nobeforeafter,
+    tcbox width=forced center,
+    opacityback=0,
+    #1
+}
+
+\newdimen\sirocco@logowidth
+\newcommand{\logos}[3][]{%
+    \sirocco@logowidth=\dimexpr\linewidth/#2\relax
+    \gdef\sirocco@logos{%
+        \begin{sirocco@logobox}
+            \foreach \logopath in {#3}{%
+                \begin{minipage}{.98\sirocco@logowidth}
+                    \centering
+                    \includegraphics[#1]{\logopath}
+                \end{minipage}
+            }
+        \end{sirocco@logobox}
+    }
+}
+\defbeamertemplate*{logos}{sirocco}{\sirocco@logos}
+
+% Title image
+\tcbset{title watermark/.style={}}
+\newcommand{\titleimg}[2][]{
+    \tcbset{
+        title watermark/.style ={
+            watermark graphics=#2,
+            #1
+        }
+    }
+}
+
+% Title page
+\newtcolorbox{sirocco@titlepage}[1][]{
+    inner, enhanced jigsaw,
+    width=\paperwidth,
+    height=\paperheight,
+    % Align
+    halign=left,
+    valign=center,
+    % Sep
+    left=.05\paperwidth,
+    right=.05\paperwidth,
+    % Colors
+    colback=title page.bg,
+    coltext=title page.fg,
+    fontupper=\usebeamerfont{title page},
+    #1
+}
+\defbeamertemplate*{title page}{sirocco}{
+    \tikz[overlay, remember picture]{
+        \node at (current page.center){
+            \begin{sirocco@titlepage}[title watermark]
+                \begin{tcbitemize}[
+                    inner, enhanced jigsaw,
+                    raster rows=3,
+                    raster columns=1,
+                    opacityback=0,
+                ]
+                \tcbitem \usebeamertemplate{title}
+                \tcbitem \usebeamertemplate{subtitle}
+                \tcbitem
+                    \begin{tcbitemize}[
+                        inner, enhanced jigsaw,
+                        raster rows=1,
+                        raster columns=2,
+                        opacityback=0,
+                    ]
+                        \tcbitem \usebeamertemplate{author}
+                        \tcbitem[halign=right] \usebeamertemplate{date}
+                        \tcbitem \usebeamertemplate{institute}
+                        \tcbitem[
+                            halign=right,
+                            coltext=date.fg,
+                            colframe=date.fg,
+                            rightrule=1pt,
+                            right=1em,
+                        ] Slides: \inserttotalframenumber
+                    \end{tcbitemize}
+                \end{tcbitemize}
+            \end{sirocco@titlepage}
+        };
+    }
+    \tikz[overlay, remember picture] {
+        \node[anchor=south, inner sep=1em] at (current page.south) {
+            \usebeamertemplate{logos}
+        }
+    }
+}
+\renewcommand{\maketitle}{
+    \frame[noframenumbering, plain]{\usebeamertemplate{title page}}
+}
+
+% Section page
+\AtBeginSection[]{\frame[noframenumbering,plain]{\usebeamertemplate{section page}}}
+\newtcolorbox{sirocco@sectionpage}[1][]{
+    inner, enhanced jigsaw,
+    width=\paperwidth,
+    height=\paperheight,
+    % Align
+    halign=center,
+    valign=center,
+    % Sep
+    left=.05\paperwidth,
+    right=.05\paperwidth,
+    % Colors
+    colback=section page.bg,
+    coltext=section page.fg,
+    fontupper=\usebeamerfont{section page},
+    #1
+}
+\defbeamertemplate*{section page}{sirocco}{
+    \tikz[overlay, remember picture]
+        \node at (current page.center){
+            \begin{sirocco@sectionpage}
+                \insertsection
+                \vskip.75em
+                \usebeamertemplate{progress bar}
+            \end{sirocco@sectionpage}
+    };
+}
+
+% Subsection page
+\AtBeginSubsection[]{\frame[noframenumbering,plain]{\usebeamertemplate{subsection page}}}
+\newtcolorbox{sirocco@subsectionpage}[1][]{
+    inner, enhanced jigsaw,
+    width=\paperwidth,
+    height=\paperheight,
+    % Align
+    halign=center,
+    valign=center,
+    % Sep
+    left=.05\paperwidth,
+    right=.05\paperwidth,
+    % Colors
+    colback=section page.bg,
+    coltext=section page.fg,
+    #1
+}
+\defbeamertemplate*{subsection page}{sirocco}{
+    \tikz[overlay, remember picture]
+        \node at (current page.center){
+            \begin{sirocco@subsectionpage}
+                {
+                    \usebeamerfont{section page} 
+                    \insertsection
+                }
+                \vskip.75em
+                \usebeamertemplate{progress bar}
+                \vskip.75em
+                {
+                    \usebeamerfont{subsection page} 
+                    \insertsubsection
+                }
+            \end{sirocco@subsectionpage}
+    };
+}
+
+% Sections in ToC
+\newtcolorbox{sirocco@tocsection}[1][]{
+    inner, bicolor,
+    width=\linewidth,
+    size=fbox,
+    #1,
+    sidebyside,
+    sidebyside gap=1em,
+    halign=center,
+    valign=center,
+    colback=alert,
+    colbacklower=dark,
+    coltext=lighttext,
+    lefthand width=2em,
+}
+\defbeamertemplate*{section in toc}{sirocco}{%
+    \begin{sirocco@tocsection}
+        \inserttocsectionnumber
+        \tcblower
+        \inserttocsection
+    \end{sirocco@tocsection}
+}
+
+% Itemize
+\defbeamertemplate*{itemize item}{sirocco}{$\circ$}
+\defbeamertemplate*{itemize subitem}{sirocco}{$\triangleright$}
+\defbeamertemplate*{itemize subsubitem}{sirocco}{$-$}
+
+
+% Block
+\tcbset{
+    block/.style n args={2}{
+        boxsep=.5em,
+        bottomrule=1pt,
+        % hbox,
+        frame style={
+            left color=#1,
+            right color=#2
+        }
+    }
+}
+\newtcolorbox{sirocco@block}[3][]{
+    inner,
+    block={block title#2.bg}{block shade#2.bg},
+    % Title
+    fonttitle=\usebeamerfont{block title#2},
+    title=#3,
+    coltitle=block title#2.fg,
+    % Upper
+    fontupper=\usebeamerfont{block body#2},
+    coltext=block body#2.fg,
+    colback=block body#2.bg,
+    % Skips
+    beforeafter skip=.5em,
+    % More
+    #1
+}
+\defbeamertemplate*{block begin}{sirocco}[2][]{
+    \begin{sirocco@block}{}{\insertblocktitle}
+}
+\defbeamertemplate*{block end}{sirocco}{\end{sirocco@block}}
+
+\defbeamertemplate*{block example begin}{sirocco}{
+    \begin{sirocco@block}{ example}{\insertblocktitle}
+}
+\defbeamertemplate*{block example end}{sirocco}{\end{sirocco@block}}
+
+\defbeamertemplate*{block alerted begin}{sirocco}{
+    \begin{sirocco@block}{ alerted}{\insertblocktitle}
+}
+\defbeamertemplate*{block alerted end}{sirocco}{\end{sirocco@block}}
+
+% Block Insert 
+\newtcolorbox{sirocco@panel}[2][]{
+    inner,
+    % Box aspect
+    boxsep=.5em,
+    rounded corners=all,
+    arc=5pt,
+    % Title
+    fonttitle={\usebeamerfont{panel title}},
+    halign title=flush center,
+    coltitle=panel title.fg,
+    colbacktitle=panel title.bg,
+    title={#2},
+    % Upper
+    fontupper=\usebeamerfont{panel body},
+    coltext=panel body.fg,
+    colback=panel body.bg,
+    % Skips
+    beforeafter skip=.5em,
+    % Shadows
+    fuzzy shadow={0pt}{0pt}{-1pt}{.5pt}{panel shade.fg},
+    % More
+    #1
+}
+\newenvironment{panel}[2][]{\begin{sirocco@panel}[#1]{#2}}{\end{sirocco@panel}}
+
+% Theorems
+\tcbset{
+    theorem like/.style n args={2}{
+        inner,
+        boxsep=.5em,
+        bottomrule=1pt,
+        frame style={
+            left color=#1,
+            right color=#2
+        }
+    }
+}
+\newcommand{\sirocco@newtheorem}[3]{
+    \ifcsmacro{#1}{
+        \gdef\sirocco@thbuilder{\renewtcbtheorem}
+    }{
+        \gdef\sirocco@thbuilder{\newtcbtheorem}
+    }
+    \sirocco@thbuilder[number within=section]{#1}{#2}{
+        theorem like={#1 title.bg}{theorem shade.bg},
+        fonttitle=\usebeamerfont{#1},
+        coltitle=#1 title.fg,
+        % Upper
+        fontupper=\usebeamerfont{#1},
+        coltext=#1 body.fg,
+        colback=#1 body.bg,
+        % Skips
+        beforeafter skip=.5em
+    }{#3}
+}
+
+\sirocco@newtheorem{definition}{Definition}{def}
+\sirocco@newtheorem{proposition}{Proposition}{prop}
+\sirocco@newtheorem{theorem}{Theorem}{th}
+
+% Figures and tables
+\newtcbox{\sirocco@captionlabel}[1][]{
+    inner,    
+    tcbox raise base,
+    size=fbox,
+    rounded corners=all,
+    colback=caption name.bg,
+    coltext=caption name.fg,
+    fontupper=\usebeamerfont{caption name},
+    #1
+}
+\defbeamertemplate*{caption}{sirocco}{
+    \sirocco@captionlabel{\insertcaptionname~\insertcaptionnumber}
+    ~\usebeamerfont{caption}\color{caption.fg}\insertcaption\color{black}
+}
+
+
+\mode<all>

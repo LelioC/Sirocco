@@ -1,0 +1,171 @@
+% An outer theme dictates (roughly) the overall layout of frames. It specifies where any navigational elements
+% should go (like a mini table of contents or navigational mini frames) and what they should look like. Typically,
+% an outer theme specifies how the following elements are rendered:
+% ∙ The head- and footline.
+% ∙ The sidebars.
+% ∙ The logo.
+% ∙ The frame title.
+% An outer theme will not specify how things like itemize environments should be rendered—that is the job
+% of an inner theme.
+
+% Load colors
+\usebeamercolor{headline}
+\usebeamercolor{framenumber}
+\usebeamercolor{totalframenumber}
+\usebeamercolor{footline}
+\usebeamercolor{progress bar}
+\usebeamercolor{framesubtitle}
+\usebeamercolor{frametitle}
+\usebeamercolor{progress bar}
+
+\mode<presentation>
+\tcbset{
+    outer/.style={
+        % box
+        sharp corners=all,
+        % frames
+        frame hidden,
+        boxrule=0pt,
+        % spacing
+        boxsep=0pt,
+        top=0pt,
+        left=0pt,
+        bottom=0pt,
+        right=0pt,
+        % before/after,
+        nobeforeafter,
+        beforeafter skip=0pt,
+        % more
+        #1
+    }
+}
+
+% Headline
+\defbeamertemplate*{headline}{sirocco}{}
+
+% Frame number
+\newtcolorbox{sirocco@framenumber}[1][]{
+    outer,
+    bicolor,
+    % side by side
+    sidebyside,
+    % box
+    width=5em,
+    height=2.5em,
+    % text
+    fontupper=\usebeamerfont{framenumber},
+    fontlower=\usebeamerfont{totalframenumber},
+    % align
+    halign upper=center,
+    valign upper=center,
+    halign lower=center,
+    valign lower=center,
+    sidebyside gap=0em,
+    % more
+    #1
+}
+\defbeamertemplate*{frame number}{sirocco}{
+    \begin{sirocco@framenumber}[%
+        colupper=framenumber.fg,
+        collower=totalframenumber.fg,
+        colback=framenumber.bg,
+        colbacklower=totalframenumber.bg,
+    ]
+        \insertframenumber
+        \tcblower
+        \inserttotalframenumber
+    \end{sirocco@framenumber}
+}
+
+% Footline
+\newtcbox{\sirocco@footline}[1][]{
+    outer,
+    % box
+    tcbox width=forced center,
+    width=\paperwidth,
+    % body
+    colback=footline.bg,
+    coltext=footline.fg,
+    opacityback=0,
+    % text
+    fontupper=\usebeamerfont{footline},
+    % more
+    #1
+}
+\defbeamertemplate*{footline}{sirocco}{
+    \sirocco@footline{%
+        \usebeamertemplate{frame number}
+    }
+}
+
+% Progress bar
+\newtcolorbox{sirocco@progressbar}[2][]{
+    outer,
+    bicolor,
+    % box
+    sidebyside,
+    sidebyside gap=0em,
+    height=1pt,
+    lefthand width=#2,
+    % body
+    colback=progress bar.fg,
+    colbacklower=progress bar.bg,
+    % Outer skips
+    before skip=.35em,
+    #1
+}
+\defbeamertemplate*{progress bar}{sirocco}{
+    \pgfmathsetlengthmacro{\sirocco@progress}{
+        % From https://tex.stackexchange.com/questions/636947/dimension-too-large-error-in-beamer-with-more-than-34-slides, it is important to first compute the ratio and then multiply by the linewidth in order to avoid an overflow when the number of slides is more than 34.
+        (\beamer@startpageofframe / max(1, \beamer@endpageofdocument)) * \linewidth 
+    }
+    \begin{sirocco@progressbar}[width=\linewidth]{\sirocco@progress}
+        \tcblower
+    \end{sirocco@progressbar}
+}
+
+% Frame subtitle
+\newtcbox{\sirocco@framesubtitle}{
+    outer,
+    % box
+    size=fbox,
+    halign=center,
+    valign=center,
+    % colors
+    colback=framesubtitle.bg,
+    coltext=framesubtitle.fg,
+    % text
+    fontupper=\usebeamerfont{framesubtitle},
+    % Skips
+    before skip=-.425pt,
+}
+% Frame title
+\newtcolorbox{sirocco@frametitle}[1][]{
+    outer,
+    % box
+    top=.2em,
+    width=\linewidth,
+    halign=center,
+    valign=center,
+    % body
+    colback=frametitle.bg,
+    coltext=frametitle.fg,
+    % text
+    fontupper=\usebeamerfont{frametitle},
+    % Outer skips
+    leftright skip=-\sirocco@hmargin-1pt,
+    % more
+    #1
+}
+\defbeamertemplate*{frametitle}{sirocco}{
+    \centering
+    \begin{sirocco@frametitle}
+        \insertframetitle\\
+        \usebeamertemplate{progress bar}
+    \end{sirocco@frametitle}
+    \ifthenelse{\equal{\insertframesubtitle}{}}{}{\sirocco@framesubtitle{\insertframesubtitle}}
+}
+
+% Navigation symbols
+\defbeamertemplate*{navigation symbols}{sirocco}{}
+\mode<all>

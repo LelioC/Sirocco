@@ -1,0 +1,28 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{etoolbox}
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+\RequirePackage{xstring}
+\RequirePackage{calc}
+\RequirePackage{tikz}
+\RequirePackage[most]{tcolorbox}
+    \tcbset{enhanced jigsaw}
+
+% Margins
+\geometry{
+	head=0pt
+}
+
+\newlength\sirocco@hmargin\sirocco@hmargin=1em
+\setbeamersize{text margin left=\sirocco@hmargin}
+\setbeamersize{text margin right=\sirocco@hmargin}
+
+% Settings
+\usefonttheme{sirocco}
+\usecolortheme{sirocco}
+\useoutertheme{sirocco}
+\useinnertheme{sirocco}
+
+\mode<all>
